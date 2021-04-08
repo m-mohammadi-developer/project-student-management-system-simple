@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreStudent;
 use App\Student;
 use Illuminate\Http\Request;
 
@@ -37,26 +38,9 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreStudent $request)
     {
-
-        $request->validate([
-            'cne' => 'required',
-            'firstName' => 'required|max:255',
-            'secondName' => 'required|max:255',
-            'age' => 'integer|required|between:7,100',
-            'speciality' => 'required|max:255',
-        ]);
-
-
-        $student = new Student();
-        $student->cne = $request->input('cne');
-        $student->firstName = $request->input('firstName');
-        $student->secondName = $request->input('secondName');
-        $student->age = $request->input('age');
-        $student->speciality = $request->input('speciality');
-
-        $student->save();
+        $student = Student::create($request->validated());
 
         return redirect()->route('home');
     }
@@ -98,30 +82,16 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreStudent $request, $id)
     {
-
         $student = Student::find($id);
+
         if (!$student) {
             return false;
         }
 
-        $request->validate([
-            'cne' => 'required',
-            'firstName' => 'required|max:255',
-            'secondName' => 'required|max:255',
-            'age' => 'integer|required|between:7,100',
-            'speciality' => 'required|max:255',
-        ]);
+        $student->update($request->validated());
 
-
-        $student->cne = $request->input('cne');
-        $student->firstName = $request->input('firstName');
-        $student->secondName = $request->input('secondName');
-        $student->age = $request->input('age');
-        $student->speciality = $request->input('speciality');
-
-        $student->save();
         return redirect()->route('home');
     }
 
