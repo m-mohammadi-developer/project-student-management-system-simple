@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Student;
 use Illuminate\Http\Request;
 
-class StrudentController extends Controller
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +29,6 @@ class StrudentController extends Controller
         $students = Student::all();
         $layout = 'create';
         return view('student', compact('students', 'layout'));
-        
     }
 
     /**
@@ -87,10 +86,9 @@ class StrudentController extends Controller
     {
         $student = Student::find($id);
         $students = Student::all();
-        
+
         $layout = 'edit';
         return view('student', compact('students', 'student', 'layout'));
-
     }
 
     /**
@@ -102,7 +100,7 @@ class StrudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $student = Student::find($id);
         if (!$student) {
             return false;
@@ -115,7 +113,7 @@ class StrudentController extends Controller
             'age' => 'integer|required|between:7,100',
             'speciality' => 'required|max:255',
         ]);
-        
+
 
         $student->cne = $request->input('cne');
         $student->firstName = $request->input('firstName');
@@ -136,6 +134,11 @@ class StrudentController extends Controller
     public function destroy($id)
     {
         $student = Student::find($id);
+
+        if (!$student) {
+            back();
+        }
+
         $student->delete();
         return redirect('/');
     }

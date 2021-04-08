@@ -28,8 +28,8 @@
                         <td>
 
                             {{-- <a href="#" class="btn btn-sm btn-info">Show</a> --}}
-                            <a href="{{ url('/edit/' . $student->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                            {{-- <a href="#" class="btn btn-sm btn-danger">Delete</a> --}}
+                            <a href="{{ route('edit', ['id' => $student->id]) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="{{ route('delete', ['id' => $student->id]) }}" class="btn btn-sm btn-danger">Delete</a>
 
                         </td>
 

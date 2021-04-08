@@ -1,9 +1,10 @@
 <?php
 
+Route::get('/', 'StudentController@index')->name('home');
 
-Route::get('/', 'StrudentController@index');
-Route::get('/edit/{id}', 'StrudentController@edit');
-Route::get('/show', 'StrudentController@show');
-Route::get('/create', 'StrudentController@create');
-Route::post('/store', 'StrudentController@store');
-Route::post('/update/{id}', 'StrudentController@update');
+Route::get('/edit/{id}', 'StudentController@edit')->name('edit');
+Route::get('/show', 'StudentController@show')->name('show');
+Route::get('/create', 'StudentController@create')->name('create');
+Route::post('/store', 'StudentController@store')->name('store');
+Route::post('/update/{id}', 'StudentController@update')->name('update');
+Route::get('/delete/{id}', 'StudentController@destroy')->name('delete');

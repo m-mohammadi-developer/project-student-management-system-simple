@@ -23,6 +23,8 @@
         </div>
     </div>
 
+    
+
     @if ($layout == 'index')
 
         <div class="container-fluid mt-4">
@@ -49,7 +51,17 @@
                         <div class="card-body">
                             <div class="card-title">Enter Student Information and Save It.</div>
                             <hr>
-                            <form action="{{ url('/store') }}" method="post">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                            <form action="{{ route('store') }}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <label>CNE</label>
@@ -70,7 +82,7 @@
 
                                 <div class="form-group">
                                     <label>Age</label>
-                                    <input name="age" type="text" class="form-control" placeholder="Enter the Age">
+                                    <input name="age" type="integer" class="form-control" placeholder="Enter the Age">
                                 </div>
                                 <div class="form-group">
                                     <label>Speciality</label>
@@ -115,8 +127,18 @@
                         <div class="card-body">
                             <div class="card-title">Update Student Information and Save It.</div>
                             <hr>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
 
-                            <form action="{{ url('/update/' . $student->id) }}" method="post">
+
+                            <form action="{{ route('update', ['id' => $student->id]) }}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <label>CNE</label>
