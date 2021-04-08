@@ -58,7 +58,7 @@ class StudentController extends Controller
 
         $student->save();
 
-        return redirect('/');
+        return redirect()->route('home');
     }
 
     /**
@@ -122,7 +122,7 @@ class StudentController extends Controller
         $student->speciality = $request->input('speciality');
 
         $student->save();
-        return redirect('/');
+        return redirect()->route('home');
     }
 
     /**
@@ -140,6 +140,6 @@ class StudentController extends Controller
         }
 
         $student->delete();
-        return redirect('/');
+        return redirect()->route('home');
     }
 }
