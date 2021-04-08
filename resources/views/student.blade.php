@@ -12,6 +12,7 @@
             <h1>Sdtudent Management System</h1>
         </div>
     </div> 
+    
 
     @if ($layout == 'index')
 
